@@ -3,6 +3,7 @@ const danz = require("d-scrape");
 const router = express.Router();
 const config = require("../schema/config");
 const skrep = require("../scrapers/ai");
+const quillbot = require("../scrapers/quillbot");
 const { developer: dev } = config.options;
 
 // Log Info
@@ -35,6 +36,36 @@ const messages = {
 };
 
 // AI Routes
+router.get("/ai/quillbot", async (req, res) => {
+  const { query, chatId, webSearch } = req.query;
+  
+  if (!query) return res.status(400).json(messages.query);
+
+  // Konversi string "true" menjadi boolean true
+  const isWebSearch = webSearch === "true";
+  
+  // Jika user tidak mengirim chatId, set null (buat sesi baru)
+  const currentChatId = chatId ? chatId : null;
+
+  try {
+    const data = await quillbot.chat(query, currentChatId, isWebSearch);
+    
+    if (!data || !data.answer) return res.status(404).json(messages.notRes);
+    
+    res.json({ 
+        status: true, 
+        developer: dev, 
+        result: {
+            answer: data.answer,
+            chatId: data.chatId, // Kembalikan chatId agar user bisa lanjut ngobrol
+            webSearch: isWebSearch
+        }
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json(messages.error);
+  }
+});
 router.get("/ai/chatgpt", async (req, res) => {
   const { query } = req.query;
   if (!query) return res.status(400).json(messages.query);

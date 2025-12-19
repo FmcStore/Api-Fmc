@@ -10,7 +10,7 @@ const options = {
 
 const host = {
   BASE_URL: "https://api.fmcstore.web.id", // Ganti dengan URL yang sesuai
-  // Contoh: https://domain.com
+  BACKUP_URL: "https://api-fmcv2.vercel.app", // Contoh: https://domain.com
 };
 
 module.exports = {

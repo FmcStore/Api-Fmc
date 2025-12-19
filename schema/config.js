@@ -1,15 +1,15 @@
 const options = {
-  name: "HitamAPIs",
-  developer: "@sayuran.vip",
+  name: "RestApi",
+  developer: "@RestApi",
   port: 3000,
-  webName: "HitamAPIs Playground",
-  description: "Simple Base Rest API",
+  webName: "Emceh Playground",
+  description: "Rest API",
   favicon:
     "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Black.png/220px-Black.png",
 };
 
 const host = {
-  BASE_URL: "https://api-fmcv2.vercel.app", // Ganti dengan URL yang sesuai
+  BASE_URL: "https://api.fmcstore.web.id", // Ganti dengan URL yang sesuai
   // Contoh: https://domain.com
 };
 

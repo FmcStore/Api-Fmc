@@ -45,7 +45,7 @@ const swaggerDocument = {
       name: "AI",
       description:
         "API endpoints for artificial intelligence content from various platforms.",
-    },
+    }, 
     // {
     //   name: "Downloader",
     //   description:
@@ -55,7 +55,7 @@ const swaggerDocument = {
     //   name: "Tools",
     //   description: "API endpoints for content tools from multiple platforms.",
     // },
-  ],
+  ], 
   paths: {
     "/api/ai/chatgpt": {
       get: {
@@ -94,6 +94,68 @@ const swaggerDocument = {
                         message: {
                           type: "string",
                           example: "Hello! How can I help you today?",
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/api/ai/quillbot": {
+      get: {
+        tags: ["AI"],
+        summary: "Chat with QuillBot AI (Web Search & Memory)",
+        parameters: [
+          {
+            in: "query",
+            name: "query",
+            schema: { type: "string" },
+            required: true,
+            description: "Pertanyaan untuk AI",
+          },
+          {
+            in: "query",
+            name: "chatId",
+            schema: { type: "string" },
+            required: false,
+            description: "ID Sesi untuk melanjutkan percakapan (Opsional)",
+          },
+          {
+            in: "query",
+            name: "webSearch",
+            schema: { type: "boolean" },
+            required: false,
+            description: "Aktifkan pencarian web? (true/false)",
+          },
+        ],
+        responses: {
+          200: {
+            description: "Result successfully returned",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    status: { type: "boolean", example: true },
+                    developer: { type: "string", example: config.options.developer },
+                    result: {
+                      type: "object",
+                      properties: {
+                        answer: {
+                          type: "string",
+                          example: "QuillBot is an AI writing assistant...",
+                        },
+                        chatId: {
+                          type: "string",
+                          example: "a1b2c3d4...",
+                        },
+                        webSearch: {
+                          type: "boolean",
+                          example: false,
                         },
                       },
                     },
